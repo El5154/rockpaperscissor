@@ -1,3 +1,10 @@
+const rockButton = document.getElementById('rock');
+const paperButton = document.getElementById('paper');
+const scissorButton = document.getElementById('scissor');
+const humanScoreSpan = document.getElementById('human-score');
+const computerScoreSpan = document.getElementById('computer-score');
+const resultSpan = document.getElementById('result-text');
+
 let humanScore = 0;
 let computerScore = 0;
 
@@ -25,14 +32,26 @@ function playRound(userChoice, computerChoice) {
     return 'You lose! ' + computerChoice + ' beats ' + userChoice;
 }
 
-function playGame() {
-    for (let i = 0; i < 5; i++) {
-        const human = getHumanChoice();
-        const computer = getComputerChoice();
-        console.log(playRound(human, computer));
-    }
-
-    console.log('Final Score - You: ' + humanScore + ' Computer: ' + computerScore);
+function update(result) {
+    humanScoreSpan.textContent = humanScore;
+    computerScoreSpan.textContent = computerScore;
+    resultSpan.textContent = result;
 }
 
-playGame();
+rockButton.addEventListener('click', () => {
+    const computerChoice = getComputerChoice();
+    const result = playRound('rock', computerChoice);
+    update(result);
+});
+
+paperButton.addEventListener('click', () => {
+  const computerChoice = getComputerChoice();
+  const result = playRound('paper', computerChoice);
+  update(result);
+});
+
+scissorButton.addEventListener('click', () => {
+  const computerChoice = getComputerChoice();
+  const result = playRound('scissors', computerChoice);
+  update(result);
+});
